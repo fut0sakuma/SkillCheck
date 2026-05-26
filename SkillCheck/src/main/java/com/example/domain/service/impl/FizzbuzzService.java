@@ -8,13 +8,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class FizzbuzzService {
 
-	public List<Integer> fizzbuzzLogic(int number) {
-
-		int totalNumber = number + 100;
+	public List<Integer> fizzbuzzList(int startNumber, int totalNumber) {
 
 		List<Integer> fizzbuzzNumber = new ArrayList<>();
 
-		for (int i = 0; i <= totalNumber; i++) {
+		for (int i = startNumber; i <= totalNumber; i++) {
 			if (i % 3 == 0 && i % 5 == 0) {
 				fizzbuzzNumber.add(i);
 			}
@@ -23,13 +21,11 @@ public class FizzbuzzService {
 		return fizzbuzzNumber;
 	}
 
-	public List<Integer> buzzLogic(int number) {
-
-		int totalNumber = number + 100;
+	public List<Integer> buzzList(int startNumber, int totalNumber) {
 
 		List<Integer> buzzNumber = new ArrayList<>();
 
-		for (int i = 0; i <= totalNumber; i++) {
+		for (int i = startNumber; i <= totalNumber; i++) {
 			if (!(i % 3 == 0) && i % 5 == 0) {
 				buzzNumber.add(i);
 			}
@@ -38,18 +34,27 @@ public class FizzbuzzService {
 		return buzzNumber;
 	}
 
-	public List<Integer> fizzLogic(int number) {
-
-		int totalNumber = number + 100;
+	public List<Integer> fizzList(int startNumber, int totalNumber) {
 
 		List<Integer> fizzNumber = new ArrayList<>();
 
-		for (int i = 0; i <= totalNumber; i++) {
+		for (int i = startNumber; i <= totalNumber; i++) {
 			if (!(i % 5 == 0) && i % 3 == 0) {
 				fizzNumber.add(i);
 			}
 		}
 
 		return fizzNumber;
+	}
+	
+	public List<Integer> fizzbuzzTotalNumberList(int startNumber, int totalNumber) {
+		
+		List<Integer> totalNumberList = new ArrayList<>();
+		
+		for(int i = startNumber; i <= totalNumber; i++) {
+			totalNumberList.add(i);
+		}
+		
+		return totalNumberList;
 	}
 }

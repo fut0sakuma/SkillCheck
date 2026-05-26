@@ -8,9 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.domain.service.impl.FizzbuzzService;
 import com.example.form.FizzbuzzForm;
@@ -22,35 +22,38 @@ public class FizzbuzzController {
 	@Autowired
 	private FizzbuzzService fizzbuzzService;
 	
-	
 	@GetMapping("/home")
-	public String getFizzbuzzHome() {
+	public String getFizzbuzzHome(Model model,@ModelAttribute FizzbuzzForm form) {
 		return "fizzbuzz/home";
 	}
 
 	@PostMapping("/home")
-	public String postFizzbuzzHome(Model model, @RequestParam int inputNumber,
-			@Validated FizzbuzzForm form,
+	public String postFizzbuzzHome(Model model,
+			 @ModelAttribute  @Validated FizzbuzzForm form,
 			BindingResult bindingResult) {
 
 		//バリデーションチェック
 		if (bindingResult.hasErrors()) {
 			//NGユーザー登録画面に戻ります
-			return getFizzbuzzHome();
+			return getFizzbuzzHome(model, form);
 		}
+
+		int startNumber = form.getInputNumber();
+		int totalNumber = form.getInputNumber() + 100;
 		
 		//受け取った値をfizzbuzzに変換
-		List<Integer> fizzNumber = fizzbuzzService.fizzLogic(inputNumber);
-		List<Integer> buzzNumber = fizzbuzzService.buzzLogic(inputNumber);
-		List<Integer> fizzbuzzNumber = fizzbuzzService.fizzbuzzLogic(inputNumber);
+		List<Integer> fizzNumber = fizzbuzzService.fizzList(startNumber, totalNumber);
+		List<Integer> buzzNumber = fizzbuzzService.buzzList(startNumber, totalNumber);
+		List<Integer> fizzbuzzNumber = fizzbuzzService.fizzbuzzList(startNumber, totalNumber);
+		List<Integer> totalNumberList = fizzbuzzService.fizzbuzzTotalNumberList(startNumber, totalNumber);
 		
 		//計算結果を受け渡し
 		model.addAttribute("fizz", fizzNumber);
 		model.addAttribute("buzz", buzzNumber);
 		model.addAttribute("fizzbuzz", fizzbuzzNumber);
+		model.addAttribute("totalNumberList", totalNumberList);
 		
 		return "fizzbuzz/result";
-		
 	}
 
 }

@@ -4,7 +4,33 @@
 </meta>
 <!--CSS読み込み-->
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/fizz.css}">
+
 <title>fizzbuzz結果画面</title>
 </head>
+
+<body>
+	<h1 class="text-center pt-3">判定結果</h1>
+	<table class="table table-bordered w-25 mx-auto text-center">
+		<tbody>
+			<tr th:each="number : ${totalNumberList}" class="text-center">
+				<td th:text="${number}">
+				</td>
+				<th:block th:each="fizzbuzzNum:${fizzbuzz}" th:if="${number == fizzbuzzNum}">
+					<th>FizzBuzz!!!</th>
+				</th:block>
+				<th:block th:each="fizzNum:${fizz}" th:if="${number == fizzNum}">
+					<th>これはFizzです</th>
+				</th:block>
+				<th:block th:each="buzzNum:${buzz}" th:if="${number == buzzNum}">
+					<th>これはBuzzです</th>
+				</th:block>
+				<th:block >
+					
+				</th:block>
+			</tr>
+		</tbody>
+	</table>
+</body>
 
 </html>
