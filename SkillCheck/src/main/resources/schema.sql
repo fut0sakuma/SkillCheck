@@ -1,6 +1,4 @@
 CREATE TABLE IF NOT EXISTS fizzbazztable(
-	inputnumber INT,
-	fizz INT,
-	buzz INT,
-	fizzbazz INT
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	inputnumber INT
 );

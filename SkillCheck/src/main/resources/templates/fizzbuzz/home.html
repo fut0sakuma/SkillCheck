@@ -15,10 +15,19 @@
 				th:errorclass="is-invalid" />
 			<div class="invalid-feedback" th:errors="*{inputNumber}"></div>
 		</div>
-		<div class="text-center">
-			<button type="submit" class="btn btn-primary ">送信</button>
+		<div class="text-center pt-4">
+			<button type="submit" class="btn btn-primary">送信</button>
 		</div>
 	</form>
+	<h2 class="text-center pt-3 font-weight-bold">過去の入力値</h2>
+	<table class="table table-borderless  w-25 mx-auto text-center font-weight-bold">
+		<tbody>
+			<tr th:each="number : ${inputNumberList}" class="text-center h5">
+				<td th:text="${number.inputNumber}">
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </body>
 
 </html>

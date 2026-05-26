@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.domain.model.MFizzBuzz;
 import com.example.domain.service.impl.FizzbuzzService;
 import com.example.form.FizzbuzzForm;
 
@@ -24,6 +25,12 @@ public class FizzbuzzController {
 	
 	@GetMapping("/home")
 	public String getFizzbuzzHome(Model model,@ModelAttribute FizzbuzzForm form) {
+		
+		List<MFizzBuzz> inputNumberList = fizzbuzzService.getInputNumber();
+		
+		if(inputNumberList != null) {
+			model.addAttribute("inputNumberList", inputNumberList);
+		}
 		return "fizzbuzz/home";
 	}
 
@@ -34,12 +41,13 @@ public class FizzbuzzController {
 
 		//バリデーションチェック
 		if (bindingResult.hasErrors()) {
-			//NGユーザー登録画面に戻ります
 			return getFizzbuzzHome(model, form);
 		}
 
 		int startNumber = form.getInputNumber();
 		int totalNumber = form.getInputNumber() + 100;
+		
+		fizzbuzzService.insertNumber(form.getInputNumber());
 		
 		//受け取った値をfizzbuzzに変換
 		List<Integer> fizzNumber = fizzbuzzService.fizzList(startNumber, totalNumber);
