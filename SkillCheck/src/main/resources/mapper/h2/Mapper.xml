@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Mapperとxmlのマッピング -->
+<!-- mapperタグのnamespace属性にMapperのインターフェース名を指定 -->
+<mapper namespace="com.example.repository.FizzBuzzMapper">
+
+	<insert id="insertOne">
+	
+		insert into fizzbazztable(
+			inputnumber
+		)
+		values (
+			#{inputNumber}
+		)
+		
+	</insert>
+	
+	<select id="getInputNumber" resultType="com.example.domain.model.MFizzBuzz">
+		SELECT 
+			inputnumber 
+		FROM 
+			fizzbazztable
+		 ORDER BY
+		  	id Desc
+		 LIMIT 3
+	</select>
+	
+</mapper>

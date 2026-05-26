@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+</meta>
+<!--CSS読み込み-->
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/fizz.css}">
+
+<title>fizzbuzz結果画面</title>
+</head>
+
+<body>
+	<h1 class="text-center pt-3">判定結果</h1>
+	<table class="table table-borderless  w-25 mx-auto text-center">
+		<tbody>
+			<tr th:each="number : ${totalNumberList}" class="text-center h5">
+				<td th:text="${number}">
+				</td>
+				<th:block th:each="fizzbuzzNum:${fizzbuzz}" th:if="${number == fizzbuzzNum}">
+					<th class="text-primary">FizzBuzz!!!</th>
+				</th:block>
+				<th:block th:each="fizzNum:${fizz}" th:if="${number == fizzNum}">
+					<th>これはFizzです</th>
+				</th:block>
+				<th:block th:each="buzzNum:${buzz}" th:if="${number == buzzNum}" 　>
+					<th class="text-danger">これはBuzzです</th>
+				</th:block>
+			</tr>
+		</tbody>
+		<div class="text-center">
+			<a th:href="@{/fizzbuzz/home}" class="btn btn-primary">ホーム画面に戻る</a>
+		</div>
+	</table>
+</body>
+
+</html>

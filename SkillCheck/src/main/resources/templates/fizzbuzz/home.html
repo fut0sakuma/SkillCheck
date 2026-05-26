@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+</meta>
+<!--CSS読み込み-->
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<title>fizzbuzzホーム画面</title>
+</head>
+
+<body>
+	<h1 class="text-center pt-3">FizzBuzz</h1>
+	<form id="fizzbuzz-form" method="post" action="/fizzbuzz/home" th:object="${fizzbuzzForm}">
+		<div class="input-group w-25 mx-auto pt-5">
+			<input type="text" class="form-control text-center" placeholder="数値を入力してね" th:field="*{inputNumber}"
+				th:errorclass="is-invalid" />
+			<div class="invalid-feedback" th:errors="*{inputNumber}"></div>
+		</div>
+		<div class="text-center pt-4">
+			<button type="submit" class="btn btn-primary">送信</button>
+		</div>
+	</form>
+	<h2 class="text-center pt-3 font-weight-bold">過去の入力値</h2>
+	<table class="table table-borderless  w-25 mx-auto text-center font-weight-bold">
+		<tbody>
+			<tr th:each="number : ${inputNumberList}" class="text-center h5">
+				<td th:text="${number.inputNumber}">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+
+</html>
